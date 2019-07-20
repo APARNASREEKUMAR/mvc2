@@ -1,0 +1,49 @@
+<?php 
+include_once $_SESSION['BASE'].'/view/header.html';
+
+    if($_SESSION["msgType"]=='success') {
+     ?>   
+    <div class="alert alert-success" role="alert">
+           <?=$_SESSION["msgContent"]?>
+    </div>
+    <?php
+    } elseif($_SESSION["msgType"]=='error') {
+    ?>
+    <div class="alert alert-danger" role="alert">
+           <?=$_SESSION["msgContent"]?>
+    </div>
+    <?php
+    }
+
+?>
+<h3>Car List</h3>
+
+    <table>
+        <thead>
+            <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+<?php   
+$cars=$this->view_data;
+for($i=0; $i< sizeof($cars);$i++){
+?>    
+            <tr>
+            <td><?=$cars[$i]['id']?></td>
+            <td><?=$cars[$i]['carname']?></td>
+            <td><a href="/car/edit/<?=$cars[$i]['id']?>"</a><button class="btn btn-warning">Edit</button></a>
+                <a href="/car/delete/<?=$cars[$i]['id']?>"  </a><button class="btn btn-danger">Delete</button></a>
+            </td>
+            </tr>
+       
+<?php    
+} 
+?>
+</tbody>
+</table>
+<?php
+include_once $_SESSION['BASE'].'/view/footer.html';
+?>
